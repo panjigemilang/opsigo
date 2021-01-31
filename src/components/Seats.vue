@@ -3,7 +3,7 @@
     <div class="screen"></div>
 
     <div
-      v-for="(items, i) in seats"
+      v-for="(items, i) in $store.seats.items"
       class="row justify-center"
       :key="`row-${i}`"
     >
@@ -21,18 +21,13 @@
 <script>
 export default {
   name: "Seats",
-  data() {
-    return {
-      seats: this.$store.seats.items,
-    }
-  },
   methods: {
     seatStatus(seat) {
       if (seat === 1) return "selected"
       else if (seat === 2) return "occupied"
     },
     selectSeat(i, j) {
-      let temp = this.seats
+      let temp = this.$store.seats.items
 
       // unselecting seat
       if (temp[i][j] === 1) {
@@ -43,7 +38,6 @@ export default {
         temp[i][j] = 1
       }
 
-      this.seats = temp
       this.$store.seats.set(temp)
 
       // save it to localstorage

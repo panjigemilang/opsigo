@@ -2,7 +2,7 @@ import Vue from "vue"
 
 const store = Vue.observable({
   movie: {
-    price: 0,
+    price: 10,
     setPrice(price) {
       this.price = price
     },
@@ -10,7 +10,7 @@ const store = Vue.observable({
   seats: {
     items: [],
     set(data) {
-      this.items = data
+      this.items = [...data]
     },
   },
 })

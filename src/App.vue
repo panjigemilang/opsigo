@@ -23,7 +23,7 @@
       You have selected
       <span id="count">{{ selectedSeats }}</span> seats for a price of $<span
         id="total"
-        >{{ selectedSeats * moviePrice }}</span
+        >{{ selectedSeats * $store.movie.price }}</span
       >
     </p>
   </div>
@@ -35,15 +35,23 @@ import Seats from "./components/Seats"
 
 export default {
   name: "App",
-  data() {
-    return {
-      selectedSeats: this.$store.seats.items.length,
-      moviePrice: this.$store.movie.price,
-    }
-  },
   components: {
     Movies,
     Seats,
+  },
+  computed: {
+    selectedSeats() {
+      let count = 0
+
+      // get selected seats
+      this.$store.seats.items.map((item) =>
+        item.map((val) => {
+          if (val === 1) count++
+        })
+      )
+
+      return count
+    },
   },
   mounted() {
     // check if there's an items in local storage
